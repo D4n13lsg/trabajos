@@ -5,7 +5,7 @@ Este proyecto se muestra como realizar un carrito de compras que guarda lo que c
 
   
 
-##main codigo 
+#main codigo 
 
 import 'package:flutter/material.dart'; 
 
@@ -341,7 +341,7 @@ class _principalState extends State<principal> {
 
   
 
-##datos guardados codigo 
+#datos guardados codigo 
 
 import 'package:carrito_v3/main.dart'; 
 
@@ -519,7 +519,7 @@ class _carritoState extends State<carrito> {
 
   
 
-##variables  
+#variables  
 
 class ListaProductos { 
 
