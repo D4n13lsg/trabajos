@@ -1,16 +1,19 @@
 # responsive_dashboard_v0
 
-A new Flutter project.
+Se crea una responsive 
 
-## Getting Started
+## responsive 4k
 
-This project is a starting point for a Flutter application.
+![image](https://user-images.githubusercontent.com/101757213/194959122-ce007a1c-4871-47f9-ad20-b0e155145ad9.png)
 
-A few resources to get you started if this is your first Flutter project:
+## responsive escritorio
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+![image](https://user-images.githubusercontent.com/101757213/194958446-ebf0dd27-38a9-44b2-b129-f31ab8053b00.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## responsive tablet
+
+![image](https://user-images.githubusercontent.com/101757213/194958749-838127d5-fd28-44c6-9a3e-12929dd7b9ab.png)
+
+## responsive celular
+
+![image](https://user-images.githubusercontent.com/101757213/194958819-cbead426-cfc0-40a1-bdc5-b9559637fe1d.png)
