@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'fogot_password_page.dart';
 
+
+//se crea una pestaña para logearse el usuario
 class LoginPage extends StatefulWidget {
   final VoidCallback showRegisterPage;
   const LoginPage ({Key? key, required this.showRegisterPage}) : super(key: key);
