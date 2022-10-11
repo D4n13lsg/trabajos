@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+//se crea una pestaña para recuperar la contraseña
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({Key? key}) : super(key: key);
 
@@ -62,7 +63,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       );
     }
   }
-
+//Los widgets son básicamente componentes de la interfaz de usuario utilizados para crear la interfaz de usuario de la aplicación
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -81,6 +82,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             ),
           ),
           const SizedBox(height: 10),
+          //Al pasar las restricciones de diseño a su elemento secundario, padding reduce las restricciones según el relleno dado, 
+          //lo que hace que el elemento secundario tenga un tamaño más pequeño. El relleno luego se adapta al tamaño de su hijo,
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
               child: TextField(
