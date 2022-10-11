@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+//se crea un registro para guardarlo en la base de datos
 class RegisterPage extends StatefulWidget {
   final VoidCallback showLoginPage;
   const RegisterPage({Key? key, required this.showLoginPage}) : super(key: key);
