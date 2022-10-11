@@ -14,12 +14,14 @@ void main() async {
   runApp(const MyApp());
 }
 
+//se crea la clase myapp 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      //el debugShowCheckedModeBanner se crea para quitar la marca de agua
       debugShowCheckedModeBanner: false,
       home: MainPage(),
     );
