@@ -1,3 +1,4 @@
+//se recorre el arreglo 
 class ListaProductos {
   final String? nombre;
   final String? imagen;
