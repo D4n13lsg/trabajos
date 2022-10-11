@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../data/get_user_name.dart';
 
+//se crea una pagina principal 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -29,8 +30,9 @@ class _HomePageState extends State<HomePage> {
     getDocId();
     super.initState();
   }
-
+//widgets son básicamente componentes de la interfaz de usuario utilizados para crear la interfaz de usuario de la aplicación
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
@@ -44,6 +46,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
+        //Un widget que establece un ActionDispatcher y un mapa de Intent to Action para ser utilizado por sus descendientes al invocar una Acción.
         actions: [
           GestureDetector(
             onTap: () {
