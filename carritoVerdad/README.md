@@ -5,543 +5,228 @@ Este proyecto se muestra como realizar un carrito de compras que guarda lo que c
 
   
 
-#main codigo 
-
-import 'package:flutter/material.dart'; 
-
-  
-
-import 'package:carrito_v3/carrito.dart'; 
-
-  
-
-import 'package:carrito_v3/variables_globales.dart'; 
-
-  
-
-import 'package:flutter/services.dart'; 
-
-  
-
-void main() { 
-
-  
-
-  runApp(const MyApp()); 
-
-   
-
-} 
-
-  
-
-class MyApp extends StatelessWidget { 
-
-  
-
-  const MyApp({Key? key}) : super(key: key); 
-
-   
-
-  
-
-  @override 
-
-   
-
-  Widget build(BuildContext context) { 
-
-   
-
-    return MaterialApp( 
-
-     
-
-      debugShowCheckedModeBanner: false, 
-
-       
-
-      title: 'el pollo feliz', 
-
-       
-
-      theme: ThemeData( 
-
-        primarySwatch: Colors.purple, 
-
-      ), 
-
-      home: const principal(), 
-
-    ); 
-
-  } 
-
-} 
-
-  
-
-class principal extends StatefulWidget { 
-
-  const principal({Key? key}) : super(key: key); 
-
-  
-
-  @override 
-
-  State<principal> createState() => _principalState(); 
-
-} 
-
-  
-
-class _principalState extends State<principal> { 
-
-  List<ListaProductos> _lista = <ListaProductos>[]; 
-
-  
-
-  final List<ListaProductos> _listacarrito = <ListaProductos>[]; 
-
-  
-
-  
-
-  @override 
-
-  void initState() { 
-
-    super.initState(); 
-
-    _productos(); 
-
-  } 
-
-  
-
-  @override 
-
-  Widget build(BuildContext context) { 
-
-    return Scaffold( 
-
-      appBar: AppBar( 
-
-        title: const Text("Restaurante"), 
-
-        actions: [ 
-
-          Row( 
-
-            children: [ 
-
-              IconButton( 
-
-                  icon: const Icon(Icons.shopping_cart), 
-
-                  onPressed: () { 
-
-                    if (_listacarrito.isNotEmpty) { 
-
-                      Navigator.of(context).push( 
-
-                        MaterialPageRoute( 
-
-                          builder: (context) => carrito(_listacarrito), 
-
-                        ), 
-
-                      ); 
-
-                    } 
-
-                  }), 
-
-            ], 
-
-          ) 
-
-        ], 
-
-      ), 
-
-      body: 
-
-      //creamos el listview  es una lista lineal deslizable de elementos. 
-
-      ListView.builder( 
-
-          itemCount: _lista.length, 
-
-          itemBuilder: (context, index) { 
-
-            //se crea una card para la empresa 
-
-            return Card( 
-
-              elevation: 5, 
-
-              child: Container( 
-
-                padding: EdgeInsets.all(8), 
-
-                child: Row( 
-
-                  mainAxisAlignment: MainAxisAlignment.center, 
-
-                  crossAxisAlignment: CrossAxisAlignment.center, 
-
-                  children: [ 
-
-                    //creamos algo para que contenga las imagenes 
-
-                    Container( 
-
-                      width: 75, 
-
-                      height: 75, 
-
-                      child: Image( 
-
-                        image: NetworkImage( 
-
-                          _lista[index].imagen.toString(), 
-
-                        ), 
-
-                        fit: BoxFit.fill, 
-
-                      ), 
-
-                    ), 
-
-                    //Un widget que expande un hijo de una Fila, Columna o Flex para que el hijo llene el espacio disponible. 
-
-                    Expanded( 
-
-                      child: Container( 
-
-                        padding: EdgeInsets.only(bottom: 1), 
-
-                        child: Column( 
-
-                          mainAxisAlignment: MainAxisAlignment.center, 
-
-                          crossAxisAlignment: CrossAxisAlignment.start, 
-
-                          children: [ 
-
-                            Padding( 
-
-                              padding: EdgeInsets.only(left: 8, right: 8), 
-
-                              child: Text( 
-
-                                _lista[index].nombre.toString(), 
-
-                                style: const TextStyle( 
-
-                                  fontSize: 18, 
-
-                                  fontWeight: FontWeight.bold, 
-
-                                ), 
-
-                              ), 
-
-                            ), 
-
-                          ], 
-
-                        ), 
-
-                      ), 
-
-                    ), 
-
-                    IconButton( 
-
-                        onPressed: () { 
-
-                          //se llamará a esta devolución de llamada cuando el usuario toque la etiqueta o las partes del avatar del chip. Si onPressed es nulo, el chip se desactivará. 
-
-                          //elije lo que quiere llevar al carro 
-
-                          setState(() { 
-
-                            if (_lista[index].isAdd!) { 
-
-                            } else { 
-
-                              _listacarrito.add(_lista[index]); 
-
-                              _lista[index].isAdd = true; 
-
-                            } 
-
-                          }); 
-
-                        }, 
-
-                      icon: Icon( Icons.favorite), 
-
-                    ), 
-
-                  ], 
-
-                ), 
-
-              ), 
-
-            ); 
-
-          }), 
-
-    ); 
-
-  } 
-
-  
-
-  void _productos() { 
-
-    var list = <ListaProductos>[ 
-
-      //se gregan las imagenes 
-
-      ListaProductos(nombre: 'sudado', imagen: 'Imagen/comida.jpg', id: 1, isAdd: false ), 
-
-      ListaProductos(nombre: 'hamburgesa', imagen: 'Imagen/hamburger.jpg', id: 2, isAdd: false), 
-
-      ListaProductos(nombre: 'pasta Rica', imagen: 'Imagen/papitas.jpg', id: 3, isAdd: false), 
-
-      ListaProductos(nombre: 'pasta Rica', imagen: 'Imagen/pasta.jpg', id: 4, isAdd: false), 
-
-      ListaProductos(nombre: 'pasta', imagen: 'Imagen/pastra.jpg', id: 5, isAdd: false), 
-
-      ListaProductos(nombre: 'pasta conalgo', imagen: 'Imagen/salchipatra.jpg', id: 6, isAdd: false), 
-
-  
-
-    ]; 
-
-    setState(() { 
-
-      //se agrega toda la lista al carrito 
-
-      _lista = list; 
-
-    }); 
-
-  } 
-
-} 
-
-  
-
-  
-
-#datos guardados codigo 
-
-import 'package:carrito_v3/main.dart'; 
-
-import 'package:flutter/material.dart'; 
-
-import 'package:carrito_v3/variables_globales.dart'; 
-
-  
-
-class carrito extends StatefulWidget { 
-
-  final List<ListaProductos> _cart; 
-
-  
-
-  const carrito(this._cart, {super.key}); 
-
-  
-
-  @override 
-
-  _carritoState createState() => _carritoState(_cart); 
-
-  
-
-} 
-
-class _carritoState extends State<carrito> { 
-
-  
-
-  _carritoState(this._cart); 
-
-  List<ListaProductos> _cart; 
-
-  
-
-  @override 
-
-  Widget build(BuildContext context) { 
-
-    return Scaffold( 
-
-      appBar: AppBar( 
-
-        title: const Text("Lista del pollo"), 
-
-        leading: IconButton( 
-
-            icon: const Icon(Icons.arrow_back), 
-
-            onPressed: () { 
-
-              Navigator.of(context).pop(); 
-
-              setState(() { 
-
-                _cart.length; 
-
-              }); 
-
-            }), 
-
-      ), 
-
-      body: 
-
-      //usamos ListView para la creacion de la lista principal de productos 
-
-      ListView.builder( 
-
-          itemCount: _cart.length, 
-
-          itemBuilder: (context, index) { 
-
-            //cada producto estara dentro de una card 
-
-            return Card( 
-
-              elevation: 5, 
-
-              margin: EdgeInsets.symmetric(horizontal: 14, vertical: 8), 
-
-              child: Container( 
-
-                padding: EdgeInsets.all(8), 
-
-                child: Row( 
-
-                  mainAxisAlignment: MainAxisAlignment.center, 
-
-                  crossAxisAlignment: CrossAxisAlignment.center, 
-
-                  children: [ 
-
-                    //se crea un container para contener lo que se guarda 
-
-                    Container( 
-
-                      width: 75, 
-
-                      height: 75, 
-
-                      child: Image( 
-
-                        image: NetworkImage( 
-
-                          _cart[index].imagen.toString(), 
-
-                        ), 
-
-                        fit: BoxFit.fill, 
-
-                      ), 
-
-                    ), 
-
-                    Expanded( 
-
-                      child: Container( 
-
-                        padding: EdgeInsets.only(bottom: 8), 
-
-                        child: Column( 
-
-                          mainAxisAlignment: MainAxisAlignment.center, 
-
-                          crossAxisAlignment: CrossAxisAlignment.start, 
-
-                          children: [ 
-
-                            Padding( 
-
-                              padding: EdgeInsets.only(left: 8, right: 8), 
-
-                              child: Text( 
-
-                                _cart[index].nombre.toString(), 
-
-                                style: TextStyle( 
-
-                                  fontSize: 16, 
-
-                                  fontWeight: FontWeight.bold, 
-
-                                ), 
-
-                              ), 
-
-                            ), 
-
-                          ], 
-
-                        ), 
-
-                      ), 
-
-                    ), 
-
-                  ], 
-
-                ), 
-
-              ), 
-
-            ); 
-
-          }), 
-
-    ); 
-
-  } 
-
-} 
-
-  
-
-#variables  
-
-class ListaProductos { 
-
-  final String? nombre; 
-
-  final String? imagen; 
-
-  final int? id; 
-
-  late final bool? isAdd; 
-
-  
-
-  ListaProductos({required this.nombre, required this.imagen, required this.id, required this.isAdd}); 
-
-} 
-
-##maqueta
-
-![image](https://user-images.githubusercontent.com/101757213/194956386-b5f83f55-aaab-4d03-8292-c2b8dd97d3c5.png)
-
-![image](https://user-images.githubusercontent.com/101757213/194956420-d718f0fd-5537-46f1-a2a3-c51736910bd2.png)
-
-
+# main codigo 
+
+import 'package:flutter/material.dart';
+import 'package:fluttershoppingcart/models/cart.dart';
+import 'package:fluttershoppingcart/models/item.dart';
+import 'package:fluttershoppingcart/screens/checkout_page.dart';
+import 'package:provider/provider.dart';
+
+void main() {
+  runApp(ChangeNotifierProvider(
+    create: (context) => Cart(),
+    child: MyApp(),
+  ));
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: HomePage(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final List<Item> items = [
+    Item(title: 'papa ', price: 5000.0,imagen: 'assets/papa.jpg'),
+    Item(title: 'yuca ', price: 4000.0,imagen: 'assets/yuca.jpg'),
+    Item(title: 'Tomate ', price: 2000.0,imagen: 'assets/tomate.jpg'),
+    Item(title: 'cebolla ', price: 2000.0,imagen: 'assets/cebolla.jpg'),
+    Item(title: 'Banano ', price: 5000.0,imagen: 'assets/platano.jpg'),
+    Item(title: 'Papaya ', price: 1500.0,imagen: 'assets/papaya.jpg'),
+    Item(title: 'Durazno ', price: 2900.0,imagen: 'assets/durazno.jpg'),
+    Item(title: 'Fresa ', price: 3400.0,imagen: 'assets/Fresas.jpg'),
+    Item(title: 'Berenjena ', price: 1500.0,imagen: 'assets/berenjena.jpg'),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<Cart>(builder: (context, cart, child) {
+      return Scaffold(
+        backgroundColor: Colors.greenAccent,
+        appBar: AppBar(
+          backgroundColor: Colors.lime,
+          title: Text('Super Mercado San Felipe'),
+          actions: <Widget>[
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Row(
+                children: <Widget>[
+                  IconButton(
+                    icon: Icon(
+                      Icons.shopping_cart,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => CheckoutPage()));
+                    },
+                  ),
+                  Text(cart.count.toString())
+                ],
+              ),
+            )
+          ],
+          centerTitle: true,
+        ),
+
+        body: cart.hola.length == 0
+            ? Center(child:Text('no tenemos mas productos en la tienda'))
+            : ListView.builder(
+          itemCount:  cart.hola.length,
+          itemBuilder: (context, index) {
+            return Card(
+              child: ListTile(
+                /*
+                leading: CircleAvatar(
+                    child: Image.network("${cart.hola[index].imagen}")),
+
+                 */
+                leading: CircleAvatar(
+                foregroundColor: Colors.black,
+                backgroundImage: NetworkImage("${cart.hola[index].imagen}"),
+            radius: 25.0,
+            ),
+              title: Text(cart.hola[index].title),
+              subtitle: Text(cart.hola[index].price.toString()),
+                trailing: IconButton(
+                  icon: Icon(Icons.favorite),
+                  onPressed: () {
+                    cart.add(cart.hola[index]);
+                  },
+                ),
+                onTap: () {
+
+                },
+              ),
+
+            );
+          },
+      ),
+      );
+    });
+  }
+}
+# checkout_page
+import 'package:flutter/material.dart';
+import 'package:fluttershoppingcart/models/cart.dart';
+import 'package:provider/provider.dart';
+
+class CheckoutPage extends StatefulWidget {
+  @override
+  _CheckoutPageState createState() => _CheckoutPageState();
+}
+
+class _CheckoutPageState extends State<CheckoutPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<Cart>(
+      builder: (context, cart, child) {
+        return Scaffold(
+          backgroundColor: Colors.lime,
+            appBar: AppBar(
+              backgroundColor: Colors.greenAccent,
+              title: Text('Carrito De Compras [\$ ${cart.totalPrice}]'),
+              centerTitle: true,
+            ),
+            body: cart.basketItems.length == 0
+                ? Center(child:Text('no tiene productos en la tienda'))
+                : ListView.builder(
+                    itemCount: cart.basketItems.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            foregroundColor: Colors.black,
+                            backgroundImage: NetworkImage("${cart.basketItems[index].imagen}"),
+                            radius: 25.0,
+                          ),
+                          title: Text(cart.basketItems[index].title),
+                          subtitle:
+                              Text(cart.basketItems[index].price.toString()),
+                          trailing: IconButton(
+                            icon: Icon(Icons.delete),
+                            onPressed: () {
+                              cart.remove(cart.basketItems[index]);
+                            },
+                          ),
+                        ),
+                      );
+                    },
+
+                  ));
+
+      },
+    );
+  }
+}
+# cart
+
+import 'package:flutter/material.dart';
+import 'package:fluttershoppingcart/models/item.dart';
+
+class Cart extends ChangeNotifier {
+
+  List<Item> _items = [];
+  List<Item> _item = [
+    Item(title: 'papa ', price: 5000.0,imagen: 'assets/papa.jpg'),
+    Item(title: 'yuca ', price: 4000.0,imagen: 'assets/yuca.jpg'),
+    Item(title: 'Tomate ', price: 2000.0,imagen: 'assets/tomate.jpg'),
+    Item(title: 'cebolla ', price: 2000.0,imagen: 'assets/cebolla.jpg'),
+    Item(title: 'Banano ', price: 5000.0,imagen: 'assets/platano.jpg'),
+    Item(title: 'Papaya ', price: 1500.0,imagen: 'assets/papaya.jpg'),
+    Item(title: 'Durazno ', price: 2900.0,imagen: 'assets/durazno.jpg'),
+    Item(title: 'Fresa ', price: 3400.0,imagen: 'assets/Fresas.jpg'),
+    Item(title: 'Berenjena ', price: 1500.0,imagen: 'assets/berenjena.jpg'),
+  ];
+  double _totalPrice = 0.0;
+
+  void add(item) {
+    _item.remove(item);
+    _items.add(item);
+    _totalPrice += item.price;
+    notifyListeners();
+  }
+
+  void remove(item) {
+    _item.add(item);
+    _items.remove(item);
+    _totalPrice -= item.price;
+    notifyListeners();
+
+  }
+
+
+  int get count {
+    return _items.length;
+  }
+
+  double get totalPrice {
+    return _totalPrice;
+  }
+
+  List<Item> get basketItems {
+    return _items;
+  }
+
+  List<Item> get hola{
+  return _item;
+  }
+}
+# item
+class Item {
+  String imagen;
+  String title;
+  double price;
+  Item({this.imagen,this.title ,this.price});
+}
 
