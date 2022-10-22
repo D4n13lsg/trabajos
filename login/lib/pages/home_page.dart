@@ -25,11 +25,11 @@ class _HomePageState extends State<HomePage> {
     }));
   }
 
-  @override
-  void initState() {
-    getDocId();
-    super.initState();
-  }
+  //@override
+  //void initState() {
+   // getDocId();
+    //super.initState();
+  //}
 //widgets son básicamente componentes de la interfaz de usuario utilizados para crear la interfaz de usuario de la aplicación
   Widget build(BuildContext context) {
     
