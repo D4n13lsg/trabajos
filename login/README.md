@@ -1,6 +1,6 @@
 # login
 
-este proyecto se crea para aprender a crear un login inicio de sesion y conectarlo con la base de datos
+este proyecto se crea para aprender a crear un login inicio de sesion y conectarlo con la base de datos y se soluciono que se duplicaran 
 
 LOGIN
 
